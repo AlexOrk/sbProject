@@ -9,6 +9,8 @@ import bank_api.entity.Client;
 import bank_api.services.AccountService;
 import bank_api.services.CardService;
 import bank_api.services.ClientService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 public class MainRestController {
+	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	// For test
 	private ClientDAO clientDAO;
@@ -37,7 +40,8 @@ public class MainRestController {
 	}
 	@GetMapping("/check")
 	public String check(HttpSession httpSession) {
-		System.out.println(httpSession.getId());
+
+		logger.info(httpSession.getId());
 		return httpSession.getId();
 	}
 	
@@ -45,8 +49,8 @@ public class MainRestController {
 	@GetMapping("/clients")
 	public List<Client> findAll() {
 		List<Client> clients = clientDAO.findAll();
-//		for (Client u : clients)
-//			System.out.println(u);
+		for (Client c : clients)
+			logger.info("Found clients: " + c);
 		return clients;
 	}
 
@@ -54,7 +58,7 @@ public class MainRestController {
 	public Client getClient(@PathVariable int clientId) {
 
 		Client client = clientDAO.findById(clientId);
-		System.out.println(client);
+		logger.info("Found client: " + client);
 
 		if (client == null) {
 			throw new RuntimeException("Client id not found - " + clientId);

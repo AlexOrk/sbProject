@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name="accounts")
+@Table(name="account")
 public class Account implements Serializable {
 
 	// define fields
