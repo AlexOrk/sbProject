@@ -46,42 +46,70 @@ public class ViewController {
 	}
 
 	@GetMapping("/check")
-	public String check(@RequestParam("id") int clientId) {
+	public String check(@RequestParam("id") int clientId, Model model) {
 		logger.info("\"/check\"");
 		String amount = accountService.checkBalance(clientId);
+		model.addAttribute("amount", amount);
 		logger.info("Return amount: " + amount);
-		return amount;
+		logger.info("Return amount page");
+		return "amount";
 	}
 
-	@GetMapping("/deposit")
-	public String deposit(@RequestParam("id") int clientId,
-						  @RequestParam("sum") String sum) {
-		logger.info("\"/deposit\"");
-		accountService.deposit(clientId, sum);
-		logger.info("Amount was deposited!");
-		return null;
-	}
-	
-	@GetMapping("/clients")
-	public List<Client> findAll() {
-		List<Client> clients = clientDAO.findAll();
-		for (Client c : clients)
-			logger.info("Found clients: " + c);
-		return clients;
+	@GetMapping("/showdepositpage")
+	public String showDepositPage() {
+		logger.info("\"/showdepositpage\"");
+		logger.info("Return deposit page");
+		return "deposit";
 	}
 
-	@GetMapping("/clients/{clientId}")
-	public Client getClient(@PathVariable int clientId) {
+//	@PostMapping("/deposit")
+//	public String deposit(@ModelAttribute("account")) {
+//
+////		@RequestParam("id") int clientId,
+////		@RequestParam("sum") String sum
+//		logger.info("\"/deposit\"");
+//		accountService.deposit(clientId, sum);
+//		logger.info("Amount was deposited!");
+//		return null;
+//	}
 
-		Client client = clientDAO.findById(clientId);
-		logger.info("Found client: " + client);
-
-		if (client == null) {
-			throw new RuntimeException("Client id not found - " + clientId);
-		}
-
-		return client;
+	@GetMapping("/viewcards")
+	public String viewCards(@RequestParam("id") int clientId) {
+		logger.info("\"/viewcards\"");
+		logger.info("Return cards page");
+		return "cards";
 	}
+
+	@GetMapping("/issue")
+	public String issueCard(@RequestParam("id") int clientId) {
+		logger.info("\"/issue\"");
+		logger.info("Return cards page");
+		return "cards";
+	}
+
+
+
+
+//	@GetMapping("/clients")
+//	public List<Client> findAll() {
+//		List<Client> clients = clientDAO.findAll();
+//		for (Client c : clients)
+//			logger.info("Found clients: " + c);
+//		return clients;
+//	}
+//
+//	@GetMapping("/clients/{clientId}")
+//	public Client getClient(@PathVariable int clientId) {
+//
+//		Client client = clientDAO.findById(clientId);
+//		logger.info("Found client: " + client);
+//
+//		if (client == null) {
+//			throw new RuntimeException("Client id not found - " + clientId);
+//		}
+//
+//		return client;
+//	}
 
 	
 }

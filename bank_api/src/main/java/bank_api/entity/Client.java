@@ -9,22 +9,22 @@ import java.util.List;
 public class Client implements Serializable {
 
 	// define fields
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-
+	
 	@Column(name="name")
 	private String name;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client",
 			cascade = CascadeType.ALL)
 	private List<Account> accounts;
-
-
-// define constructors
-
+	
+		
+	// define constructors
+	
 	public Client() {}
 
 	public Client(String name) {
@@ -49,9 +49,6 @@ public class Client implements Serializable {
 		this.name = name;
 	}
 
-	public List<Account> getAccounts() {
-		return accounts;
-	}
 
 	// define toString
 
@@ -59,8 +56,9 @@ public class Client implements Serializable {
 	public String toString() {
 		return "Client [id=" + id + ", name=" + name + "]";
 	}
-
+		
 }
+
 
 
 

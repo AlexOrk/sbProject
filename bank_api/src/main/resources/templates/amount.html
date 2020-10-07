@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Amount</title>
+</head>
+<body>
+<h2>Current balance</h2>
+<hr>
+<p>Your balance: <div th:remove="tag" th:text="${amount}"></div></p>
+</body>
+</html>
