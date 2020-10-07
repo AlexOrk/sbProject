@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService {
     private AccountDAO accountDAO;
@@ -42,5 +44,15 @@ public class AccountServiceImpl implements AccountService {
         System.out.println();
         System.out.println();
         System.out.println();
+    }
+
+    @Override
+    public Account findById(int id) {
+        return accountDAO.findById(id);
+    }
+
+    @Override
+    public List<Account> findAll() {
+        return accountDAO.findAll();
     }
 }

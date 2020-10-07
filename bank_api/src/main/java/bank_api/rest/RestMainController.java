@@ -5,6 +5,8 @@ import java.util.List;
 import bank_api.dao.AccountDAO;
 import bank_api.dao.CardDAO;
 import bank_api.dao.ClientDAO;
+import bank_api.entity.Account;
+import bank_api.entity.Card;
 import bank_api.entity.Client;
 import bank_api.services.AccountService;
 import bank_api.services.CardService;
@@ -27,12 +29,12 @@ public class RestMainController {
 	private ClientService clientService;
 	private AccountService accountService;
 	private CardService cardService;
-	
+
 	@Autowired
-	public RestMainController(ClientDAO clientDAO, AccountService accountService, CardDAO cardDAO) {
+	public RestMainController(ClientDAO clientDAO, AccountService accountService, CardService cardService) {
 		this.clientDAO = clientDAO;
 		this.accountService = accountService;
-		this.cardDAO = cardDAO;
+		this.cardService = cardService;
 	}
 
 	@GetMapping("/check")
@@ -51,29 +53,40 @@ public class RestMainController {
 		logger.info("Amount was deposited!");
 		return null;
 	}
-	
-	@GetMapping("/clients")
-	public List<Client> findAll() {
-		List<Client> clients = clientDAO.findAll();
-		for (Client c : clients)
-			logger.info("Found clients: " + c);
-		return clients;
+
+//    @GetMapping("/clients")
+//    public List<Client> findAll() {
+//        List<Client> clients = clientDAO.findAll();
+//        for (Client c : clients)
+//            logger.info("Found clients: " + c);
+//        return clients;
+//    }
+//
+//    @GetMapping("/clients/{clientId}")
+//    public Client getClient(@PathVariable int clientId) {
+//
+//        Client client = clientDAO.findById(clientId);
+//        logger.info("Found client: " + client);
+//
+//        if (client == null) {
+//            throw new RuntimeException("Client id not found - " + clientId);
+//        }
+//
+//        return client;
+//    }
+
+	@PostMapping("/new_card")
+	public String addCard(@RequestBody Account account) {
+		long number = cardService.getNewCardNumber();
+		int cvv = cardService.generateCvv();
+		String date = cardService.getExpirationDate();
+		Account selectedAccount = accountService.findById(account.getId());
+		Card newCard = new Card(number, date, cvv, selectedAccount);
+		cardService.save(newCard);
+		return newCard.toString();
 	}
 
-	@GetMapping("/clients/{clientId}")
-	public Client getClient(@PathVariable int clientId) {
 
-		Client client = clientDAO.findById(clientId);
-		logger.info("Found client: " + client);
-
-		if (client == null) {
-			throw new RuntimeException("Client id not found - " + clientId);
-		}
-
-		return client;
-	}
-
-	
 }
 
 

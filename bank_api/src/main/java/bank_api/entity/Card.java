@@ -31,10 +31,11 @@ public class Card implements Serializable {
 
 	public Card() {}
 
-	public Card(long number, String issue, int cvv) {
+	public Card(long number, String issue, int cvv, Account account) {
 		this.number = number;
 		this.issue = issue;
 		this.cvv = cvv;
+		this.account = account;
 	}
 
 	// define getter/setter
@@ -79,16 +80,5 @@ public class Card implements Serializable {
 		return "Card [id=" + id + ", number=" + number +
 				", issueDate=" + issue + ", cvv" + cvv + "]";
 	}
-		
+
 }
-
-
-
-
-
-
-
-
-
-
-
