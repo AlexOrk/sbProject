@@ -16,7 +16,7 @@ public class AccountDAOImpl implements AccountDAO {
 
 	// define field for entitymanager	
 	private EntityManager entityManager;
-		
+
 	// set up constructor injection
 	@Autowired
 	public AccountDAOImpl(EntityManager theEntityManager) {

@@ -12,14 +12,10 @@ import bank_api.services.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class MainRestController {
+public class RestMainController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	// For test
@@ -33,19 +29,29 @@ public class MainRestController {
 	private CardService cardService;
 	
 	@Autowired
-	public MainRestController(ClientDAO clientDAO, AccountService accountService, CardDAO cardDAO) {
+	public RestMainController(ClientDAO clientDAO, AccountService accountService, CardDAO cardDAO) {
 		this.clientDAO = clientDAO;
 		this.accountService = accountService;
 		this.cardDAO = cardDAO;
 	}
-	@GetMapping("/check")
-	public String check(HttpSession httpSession) {
 
-		logger.info(httpSession.getId());
-		return httpSession.getId();
+	@GetMapping("/check")
+	public String check(@RequestParam("id") int clientId) {
+		logger.info("\"/check\"");
+		String amount = accountService.checkBalance(clientId);
+		logger.info("Return amount: " + amount);
+		return amount;
+	}
+
+	@GetMapping("/deposit")
+	public String deposit(@RequestParam("id") int clientId,
+						  @RequestParam("sum") String sum) {
+		logger.info("\"/deposit\"");
+		accountService.deposit(clientId, sum);
+		logger.info("Amount was deposited!");
+		return null;
 	}
 	
-	// expose "/employees" and return list of employees
 	@GetMapping("/clients")
 	public List<Client> findAll() {
 		List<Client> clients = clientDAO.findAll();

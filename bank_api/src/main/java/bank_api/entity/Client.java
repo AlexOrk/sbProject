@@ -2,6 +2,7 @@ package bank_api.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="client")
@@ -17,9 +18,9 @@ public class Client implements Serializable {
 	@Column(name="name")
 	private String name;
 
-	@OneToOne(mappedBy = "client",
-			cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	private Account account;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client",
+			cascade = CascadeType.ALL)
+	private List<Account> accounts;
 	
 		
 	// define constructors

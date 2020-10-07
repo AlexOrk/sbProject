@@ -22,7 +22,7 @@ public class Account implements Serializable {
 	@Column(name = "amount")
 	private BigDecimal amount;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "client_id")
 	private Client client;
 

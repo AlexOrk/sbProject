@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+<h2>Bank start page</h2>
+<hr>
+<p>Select transaction:</p>
+<table>
+    <tr>
+        <th><a th:href="@{/api/check(id=1)}">Check the balance</a></th>
+    </tr>
+    <tr>
+        <th><a th:href="@{/api/deposit(id=1, )}">Deposit</a></th>
+    </tr>
+    <tr>
+        <th><a th:href="@{/api/deposit(id=1, )}">просмотр списка карт</a></th>
+    </tr>
+    <tr>
+        <th><a th:href="@{/api/deposit(id=1, )}">Выпуск новой карты по счету</a></th>
+    </tr>
+</table>
+</body>
+</html>
