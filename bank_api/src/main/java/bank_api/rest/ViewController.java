@@ -3,6 +3,7 @@ package bank_api.rest;
 import bank_api.dao.AccountDAO;
 import bank_api.dao.CardDAO;
 import bank_api.dao.ClientDAO;
+import bank_api.entity.Account;
 import bank_api.entity.Client;
 import bank_api.services.AccountService;
 import bank_api.services.CardService;
@@ -21,26 +22,23 @@ import java.util.List;
 public class ViewController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
-	// For test
-	private ClientDAO clientDAO;
-	private AccountDAO accountDAO;
-	private CardDAO cardDAO;
-
 	// For release
 	private ClientService clientService;
 	private AccountService accountService;
 	private CardService cardService;
 
 	@Autowired
-	public ViewController(ClientDAO clientDAO, AccountService accountService, CardDAO cardDAO) {
-		this.clientDAO = clientDAO;
+	public ViewController(ClientService clientService,
+						  AccountService accountService,
+						  CardService cardService) {
+		this.clientService = clientService;
 		this.accountService = accountService;
-		this.cardDAO = cardDAO;
+		this.cardService = cardService;
 	}
 
-	@GetMapping("/start")
+	@GetMapping("/welcome")
 	public String start() {
-		logger.info("\"/start\"");
+		logger.info("\"/welcome\"");
 		logger.info("Return welcome page");
 		return "welcome";
 	}
@@ -55,25 +53,40 @@ public class ViewController {
 		return "amount";
 	}
 
-	@GetMapping("/showdepositpage")
-	public String showDepositPage() {
-		logger.info("\"/showdepositpage\"");
+	@GetMapping("/selectAccount")
+	public String selectAccount(@RequestParam("id") int clientId, Model model) {
+		logger.info("\"/selectAccount\"");
+//		List<Account> accounts = list by id
+//		model.addAttribute("accounts", accounts);
+		logger.info("Return accounts page");
+		return "accounts";
+	}
+
+	@GetMapping("/deposit")
+	public String deposit(@RequestParam("id") int accountId, Model model) {
+		logger.info("\"/selectAccount\"");
+		Account account = accountService.findById(accountId);
+		model.addAttribute("account", account);
 		logger.info("Return deposit page");
 		return "deposit";
 	}
 
-//	@PostMapping("/deposit")
-//	public String deposit(@ModelAttribute("account")) {
-//
-////		@RequestParam("id") int clientId,
-////		@RequestParam("sum") String sum
-//		logger.info("\"/deposit\"");
-//		accountService.deposit(clientId, sum);
-//		logger.info("Amount was deposited!");
-//		return null;
-//	}
+	@PostMapping("/saveDeposit")
+	public String deposit(@ModelAttribute("account") Account account) {
+		logger.info("\"/saveDeposit\"");
 
-	@GetMapping("/viewcards")
+//		!!!		Caution, some shit-code here	!!!
+		Account accountBefore = accountService.findById(account.getId());
+		account.setAmount(accountBefore.getAmount().add(account.getAmount()));
+		accountService.save(account);
+//				shit-code happens
+
+		System.out.println(account.getAmount());
+		logger.info("Amount was deposited!");
+		return "welcome";
+	}
+
+	@GetMapping("/viewCards")
 	public String viewCards(@RequestParam("id") int clientId) {
 		logger.info("\"/viewcards\"");
 		logger.info("Return cards page");
@@ -111,7 +124,7 @@ public class ViewController {
 //		return client;
 //	}
 
-	
+
 }
 
 

@@ -30,20 +30,9 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountDAO.findById(id);
         BigDecimal bd = account.getAmount().add(new BigDecimal(sum));
         account.setAmount(bd);
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println(bd);
+
         accountDAO.save(account);
 
-        Account account1 = accountDAO.findById(id);
-        System.out.println(account1.getAmount());
-
-        String account2 = checkBalance(1);
-        System.out.println(account2);
-        System.out.println();
-        System.out.println();
-        System.out.println();
     }
 
     @Override
@@ -59,5 +48,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Account> findAll() {
         return accountDAO.findAll();
+    }
+
+    @Override
+    public void save(Account account) {
+        accountDAO.save(account);
     }
 }

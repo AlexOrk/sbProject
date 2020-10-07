@@ -14,4 +14,6 @@ public interface AccountService {
     public List<Account> findByClientId(int clientId);
 
     public List<Account> findAll();
+
+    public void save(Account account);
 }

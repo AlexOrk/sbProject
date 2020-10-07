@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accounts</title>
+</head>
+<body>
+<h2>Your available accounts</h2>
+<hr>
+<p>Select an account:</p>
+<table>
+    <tr>
+        <th>Account number</th>
+        <th>Current amount</th>
+        <th>Select cart</th>
+    </tr>
+    <tr th:each="account : ${accounts}">
+        <td th:text="${account.number}"/>
+        <td th:text="${account.amount}"/>
+        <td>
+            <a th:href="@{/api/deposit(id=${account.id})}"></a>
+        </td>
+    </tr>
+</table>
+<p><a th:href="/api/welcome">Back</a> </p>
+
+</body>
+</html>

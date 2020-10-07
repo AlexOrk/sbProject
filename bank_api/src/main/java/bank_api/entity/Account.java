@@ -65,6 +65,14 @@ public class Account implements Serializable {
 		this.amount = amount;
 	}
 
+	public Client getClient() {
+		return client;
+	}
+
+	public List<Card> getCards() {
+		return cards;
+	}
+
 	// define toString
 
 	@Override
