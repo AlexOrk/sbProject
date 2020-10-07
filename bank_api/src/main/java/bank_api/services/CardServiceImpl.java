@@ -38,6 +38,11 @@ public class CardServiceImpl implements CardService {
         return cardDAO.findById(id);
     }
 
+    @Override
+    public List<Card> findByAccountId(int accountId) {
+        return cardDAO.findByAccountId(accountId);
+    }
+
 
     @Override
     public void save(Card card) {

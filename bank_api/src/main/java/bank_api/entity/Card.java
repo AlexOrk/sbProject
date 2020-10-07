@@ -77,8 +77,8 @@ public class Card implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Card [id=" + id + ", number=" + number +
-				", issueDate=" + issue + ", cvv" + cvv + "]";
+		return "{\n  \"id\":" + id + ",\n  \"number\":" + number +
+				",\n  \"issue\":" + issue + ",\n  \"cvv\":" + cvv + "\n}";
 	}
 
 }

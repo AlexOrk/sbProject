@@ -55,6 +55,18 @@ public class CardDAOImpl implements CardDAO {
         return card;
     }
 
+    @Override
+    public List<Card> findByAccountId(int accountId) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<Card> theQuery =
+                currentSession.createQuery(
+                        "from Card where account_id=:accountId",Card.class);
+        theQuery.setParameter("accountId", accountId);
+        List<Card> cards = theQuery.getResultList();
+
+        return cards;
+    }
+
 
     @Override
     public void save(Card card) {

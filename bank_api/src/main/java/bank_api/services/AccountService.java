@@ -11,5 +11,7 @@ public interface AccountService {
 
     public Account findById(int id);
 
+    public List<Account> findByClientId(int clientId);
+
     public List<Account> findAll();
 }

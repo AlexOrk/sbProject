@@ -1,5 +1,8 @@
 package bank_api.rest;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import bank_api.dao.AccountDAO;
@@ -85,6 +88,29 @@ public class RestMainController {
         cardService.save(newCard);
         return newCard.toString();
     }
+
+    @PostMapping("/view_cards")
+    public String viewCards(@RequestBody Client client) {
+        List<Account> accounts = accountService.findByClientId(client.getId());
+        List<Card> cards = new ArrayList<>();
+        for (Account account : accounts) {
+            cards.addAll(cardService.findByAccountId(account.getId()));
+        }
+        System.out.println(cards);
+        return cards.toString();
+    }
+
+    @PostMapping("/view_balance")
+    public String viewBalance(@RequestBody Account account) {
+        Account selectedAccount = accountService.findById(account.getId());
+        return selectedAccount.toString();
+    }
+
+//    @PostMapping("/deposit")
+//    public String deposit(@RequestBody Account account) {
+//        Account selectedAccount = accountService.findById(account.getId());
+//        return selectedAccount.toString();
+//    }
 
 
 }

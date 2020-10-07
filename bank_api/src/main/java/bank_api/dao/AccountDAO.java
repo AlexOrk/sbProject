@@ -10,6 +10,8 @@ public interface AccountDAO {
 
 	public Account findById(int id);
 
+	public List<Account>  findByCliendId(int id);
+
 	public void save(Account account);
 
 	public void deleteById(int id);

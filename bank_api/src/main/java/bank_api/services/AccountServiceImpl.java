@@ -52,6 +52,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<Account> findByClientId(int clientId) {
+        return accountDAO.findByCliendId(clientId);
+    }
+
+    @Override
     public List<Account> findAll() {
         return accountDAO.findAll();
     }

@@ -5,60 +5,61 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="client")
+@Table(name = "client")
 public class Client implements Serializable {
 
-	// define fields
+    // define fields
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@Column(name="name")
-	private String name;
+    @Column(name = "name")
+    private String name;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client",
-			cascade = CascadeType.ALL)
-	private List<Account> accounts;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client",
+            cascade = CascadeType.ALL)
+    private List<Account> accounts;
 
 
 // define constructors
 
-	public Client() {}
+    public Client() {
+    }
 
-	public Client(String name) {
-		this.name = name;
-	}
+    public Client(String name) {
+        this.name = name;
+    }
 
-	// define getter/setter
+    // define getter/setter
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public List<Account> getAccounts() {
-		return accounts;
-	}
+    public List<Account> getAccounts() {
+        return accounts;
+    }
 
-	// define toString
+    // define toString
 
-	@Override
-	public String toString() {
-		return "Client [id=" + id + ", name=" + name + "]";
-	}
+    @Override
+    public String toString() {
+        return "{\n  \"id\":" + id + ",\n  \"name\":" + name + "\n}";
+    }
 
 }
 
