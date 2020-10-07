@@ -82,14 +82,3 @@ public class Card implements Serializable {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-

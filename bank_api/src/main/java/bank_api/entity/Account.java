@@ -71,5 +71,16 @@ public class Account implements Serializable {
 	public String toString() {
 		return "{\n  \"id\":" + id + ",\n  \"number\":" + number + ",\n  \"amount\":" + amount + ",\n  \"client_id\":" + client.getId() + "\n}";
 	}
-
+		
 }
+
+
+
+
+
+
+
+
+
+
+

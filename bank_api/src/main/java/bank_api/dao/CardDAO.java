@@ -6,18 +6,14 @@ import java.util.List;
 
 public interface CardDAO {
 
-    public List<Card> findAll();
+	public List<Card> findAll();
 
-    public Card findById(int id);
+	public Card findById(int id);
 
     public List<Card> findByAccountId(int accountId);
 
     public void save(Card card);
 
-    public void deleteById(int id);
-
-    public int getAmountCards();
-
-//    public Card getLastCard();
+	public void deleteById(int id);
 
 }
