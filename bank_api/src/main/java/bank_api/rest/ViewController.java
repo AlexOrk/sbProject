@@ -1,11 +1,7 @@
 package bank_api.rest;
 
-import bank_api.dao.AccountDAO;
-import bank_api.dao.CardDAO;
-import bank_api.dao.ClientDAO;
 import bank_api.entity.Account;
 import bank_api.entity.Card;
-import bank_api.entity.Client;
 import bank_api.services.AccountService;
 import bank_api.services.CardService;
 import bank_api.services.ClientService;
@@ -17,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller

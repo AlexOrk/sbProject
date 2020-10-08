@@ -5,9 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import bank_api.entity.Account;
-import bank_api.entity.Card;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class AccountDAOImpl implements AccountDAO {
 
-    // define field for entitymanager
+    private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
     private EntityManager entityManager;
 
-    // set up constructor injection
     @Autowired
     public AccountDAOImpl(EntityManager theEntityManager) {
         entityManager = theEntityManager;
@@ -28,32 +28,31 @@ public class AccountDAOImpl implements AccountDAO {
     @Override
     @Transactional
     public List<Account> findAll() {
-
-        // get the current hibernate session
+        logger.info("\"findAll()\"");
+        logger.info("Get the current hibernate session");
         Session currentSession = entityManager.unwrap(Session.class);
 
-        // create a query
+        logger.info("Create a query");
         Query<Account> theQuery =
                 currentSession.createQuery("from Account", Account.class);
 
-        // execute query and get result list
+        logger.info("Execute query and get accounts list");
         List<Account> accounts = theQuery.getResultList();
 
-        // return the results
+        logger.info("return accounts");
         return accounts;
     }
 
     @Override
     public Account findById(int id) {
-
-        // get the current hibernate session
+        logger.info("\"findById(int id)\"");
+        logger.info("Get the current hibernate session");
         Session currentSession = entityManager.unwrap(Session.class);
 
-        // get the employee
-        Account account =
-                currentSession.get(Account.class, id);
+        logger.info("Get an account");
+        Account account = currentSession.get(Account.class, id);
 
-        // return the employee
+        logger.info("Return the account");
         return account;
     }
 
@@ -62,52 +61,59 @@ public class AccountDAOImpl implements AccountDAO {
     // то можно просто обратиться к clientService.findById().getAccounts()
     // ####################################################
     @Override
-    public List<Account> findByCliendId(int clientId) {
-
+    public List<Account> findByCliendId(int clientId) { // Опечатка
+        logger.info("\"findByCliendId(int clientId)\"");
+        logger.info("Get the current hibernate session");
         Session currentSession = entityManager.unwrap(Session.class);
+
+        logger.info("Create a query");
         Query<Account> theQuery =
                 currentSession.createQuery(
                         "from Account where client_id=:clientId", Account.class);
         theQuery.setParameter("clientId", clientId);
+
+        logger.info("Get accounts");
         List<Account> accounts = theQuery.getResultList();
 
+        logger.info("Return accounts");
         return accounts;
     }
 
 
     @Override
     public void save(Account account) {
-
-        // get the current hibernate session
+        logger.info("\"Save(Account account)\"");
+        logger.info("Get the current hibernate session");
         Session currentSession = entityManager.unwrap(Session.class);
 
-        // save employee
+        logger.info("Save the account");
         currentSession.saveOrUpdate(account);
     }
 
     @Override
     public void merge(Account account) {
-
-        // get the current hibernate session
+        logger.info("\"merge(Account account)\"");
+        logger.info("Get the current hibernate session");
         Session currentSession = entityManager.unwrap(Session.class);
 
-        // save employee
+        logger.info("Save the account");
         currentSession.merge(account);
     }
 
 
     @Override
     public void deleteById(int id) {
-
-        // get the current hibernate session
+        logger.info("\"deleteById(int id)\"");
+        logger.info("\"Get the current hibernate session\"");
         Session currentSession = entityManager.unwrap(Session.class);
 
-        // delete object with primary key
+        logger.info("Delete object with primary key");
         Query theQuery =
                 currentSession.createQuery(
                         "delete from Account where id=:accountId");
         theQuery.setParameter("accountId", id);
 
+        logger.info("Delete the object");
         theQuery.executeUpdate();
     }
 

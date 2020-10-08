@@ -3,6 +3,8 @@ package bank_api.dao;
 import bank_api.entity.Client;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,8 +14,7 @@ import java.util.List;
 
 @Repository
 public class ClientDAOImpl implements ClientDAO {
-
-	// define field for entitymanager
+	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 	private EntityManager entityManager;
 
 	// set up constructor injection
@@ -26,57 +27,58 @@ public class ClientDAOImpl implements ClientDAO {
 	@Override
 	@Transactional
 	public List<Client> findAll() {
-
-		// get the current hibernate session
+		logger.info("\"findAll()\"");
+		logger.info("Get the current hibernate session");
 		Session currentSession = entityManager.unwrap(Session.class);
-		
-		// create a query
+
+		logger.info("Create a query");
 		Query<Client> theQuery = currentSession.createQuery("from Client", Client.class);
-		
-		// execute query and get result list
+
+		logger.info("Execute query and get clients list");
 		List<Client> clients = theQuery.getResultList();
-		
-		// return the results		
+
+		logger.info("return clients");
 		return clients;
 	}
 
 	@Override
 	public Client findById(int id) {
-
-		// get the current hibernate session
+		logger.info("\"findById(int id)\"");
+		logger.info("Get the current hibernate session");
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// get the employee
+		logger.info("Get a client");
 		Client client = currentSession.get(Client.class, id);
 
-		// return the employee
+		logger.info("Return the client");
 		return client;
 	}
 
 
 	@Override
 	public void save(Client client) {
-
-		// get the current hibernate session
+		logger.info("\"save(Client client)\"");
+		logger.info("Get the current hibernate session");
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// save employee
+		logger.info("Save the client");
 		currentSession.saveOrUpdate(client);
 	}
 
 
 	@Override
 	public void deleteById(int id) {
-
-		// get the current hibernate session
+		logger.info("\"deleteById(int id)\"");
+		logger.info("Get the current hibernate session");
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// delete object with primary key
+		logger.info("Create a query");
 		Query theQuery =
 				currentSession.createQuery(
 						"delete from Client where id=:clientId");
 		theQuery.setParameter("clientId", id);
 
+		logger.info("Delete object with primary key");
 		theQuery.executeUpdate();
 	}
 
