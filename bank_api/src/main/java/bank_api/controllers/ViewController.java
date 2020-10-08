@@ -1,4 +1,4 @@
-package bank_api.rest;
+package bank_api.controllers;
 
 import bank_api.entity.Account;
 import bank_api.entity.Card;
@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+
+//** ViewController receives data from the client browser.
+// Used to work with the graphical interface. */
 
 @Controller
 @RequestMapping("/api")
@@ -33,6 +36,7 @@ public class ViewController {
 		this.cardService = cardService;
 	}
 
+	// Start work from here
 	@GetMapping("/welcome")
 	public String welcome() {
 		logger.info("\"/welcome\"");
@@ -40,6 +44,7 @@ public class ViewController {
 		return "welcome";
 	}
 
+	// The controller searches all accounts and return them to view or select
 	@GetMapping("/selectAccount")
 	public String selectAccount(@RequestParam("id") int clientId,
 						@RequestParam("action") String action,
@@ -62,6 +67,7 @@ public class ViewController {
 		}
 	}
 
+	// The controller searches an account and returns deposit form page
 	@GetMapping("/deposit")
 	public String deposit(@RequestParam("id") int accountId, Model model) {
 		logger.info("\"/selectAccount\"");
@@ -71,25 +77,25 @@ public class ViewController {
 		return "deposit";
 	}
 
+	// The controller saves deposit on selected account
 	@PostMapping("/saveDeposit")
 	public String saveDeposit(@ModelAttribute("account") Account newAccount,
 						  Model model) {
 		logger.info("\"/saveDeposit\"");
 
-//		!!!		Caution, some shit-code here	!!!
 		Account account = accountService.findById(newAccount.getId());
 		newAccount.setAmount(account.getAmount().add(newAccount.getAmount()));
 		newAccount.setClient(account.getClient());
 		accountService.merge(newAccount);
-//				shit-code happens
-
 		logger.info("Amount was deposited!");
+
 		List<Account> accounts = newAccount.getClient().getAccounts();
 		model.addAttribute("accounts", accounts);
 		logger.info("Return amount page");
 		return "amount";
 	}
 
+	// The controller searches all cards from all clients accounts and returns them
 	@GetMapping("/viewCards")
 	public String viewCards(@RequestParam("id") int clientId, Model model) {
 		logger.info("\"/viewCards\"");
@@ -103,6 +109,8 @@ public class ViewController {
 		return "cards";
 	}
 
+	// The controller creates a new card for selected account and returns info about
+	// all users cards
 	@GetMapping("/createCard")
 	public String createCard(@RequestParam("id") int accountId,
 							 RedirectAttributes redirectAttributes) {
