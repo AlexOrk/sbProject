@@ -2,11 +2,14 @@ package bank_api.services;
 
 import bank_api.dao.AccountDAO;
 import bank_api.entity.Account;
+import bank_api.entity.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,13 +22,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public String checkBalance(int id) {
         Account account = accountDAO.findById(id);
-        System.out.println(account.getAmount());
         return account.getAmount().toString();
     }
 
     @Override
+    @Transactional
     public void deposit(int id, String sum) {
         Account account = accountDAO.findById(id);
         BigDecimal bd = account.getAmount().add(new BigDecimal(sum));
@@ -36,6 +40,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public Account findById(int id) {
         return accountDAO.findById(id);
     }
@@ -46,12 +51,31 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public List<Account> findAll() {
         return accountDAO.findAll();
     }
 
     @Override
+    @Transactional
     public void save(Account account) {
         accountDAO.save(account);
+    }
+
+    @Override
+    @Transactional
+    public void merge(Account account) {
+        accountDAO.merge(account);
+    }
+
+    @Override
+    @Transactional
+    public List<Card> getAllCards(List<Account> accounts) {
+        List<Card> cards = new ArrayList<>();
+        for (Account account : accounts) {
+            List<Card> tempList = account.getCards();
+            cards.addAll(tempList);
+        }
+        return cards;
     }
 }

@@ -8,23 +8,25 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
           crossorigin="anonymous">
 
-    <title>Amount</title>
+    <title>Cards</title>
 </head>
 <body>
 <div class="container">
-    <h2>Current balance</h2>
+    <h2>Your cards</h2>
     <hr>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
             <th>Account number</th>
-            <th>Current amount</th>
+            <th>Card number</th>
+            <th>Expiration date</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="account : ${accounts}">
-            <td th:text="${account.number}"/>
-            <td th:text="${account.amount}"/>
+        <tr th:each="card : ${cards}">
+            <td th:text="${card.account.number}"/>
+            <td th:text="${card.number}"/>
+            <td th:text="${card.issue}"/>
         </tr>
         </tbody>
     </table>

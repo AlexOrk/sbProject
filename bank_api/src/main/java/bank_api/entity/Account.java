@@ -65,8 +65,16 @@ public class Account implements Serializable {
 		this.amount = amount;
 	}
 
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
 	public Client getClient() {
 		return client;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
 	}
 
 	public List<Card> getCards() {

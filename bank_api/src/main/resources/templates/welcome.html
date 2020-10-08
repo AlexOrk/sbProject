@@ -3,25 +3,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+
     <title>Welcome</title>
 </head>
 <body>
-<h2>Bank start page</h2>
-<hr>
-<p>Select transaction:</p>
-<table>
-    <tr>
-        <th><a th:href="@{/api/check(id=1)}">View balance</a></th>
-    </tr>
-    <tr>
-        <th><a th:href="@{/api/selectAccount(id=1)}">Deposit</a></th>
-    </tr>
-    <tr>
-        <th><a th:href="@{/api/viewCards(id=1)}">View cards</a></th>
-    </tr>
-    <tr>
-        <th><a th:href="@{/api/issue(id=1, )}">Issuing a new card</a></th>
-    </tr>
-</table>
+<div class="container">
+    <h2>Bank welcome page</h2>
+    <hr>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Select transaction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>
+                <a th:href="@{/api/selectAccount(id=1, action='check')}"
+                   class="nav-link" style="link: rgba(0,0,0,0.35);">View balance</a>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <a th:href="@{/api/selectAccount(id=1, action='deposit')}"
+                   class="nav-link">Deposit</a>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <a th:href="@{/api/viewCards(id=1)}"
+                   class="nav-link">View all cards</a>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <a th:href="@{/api/selectAccount(id=1, action='order')}"
+                   class="nav-link">Order a new card</a>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

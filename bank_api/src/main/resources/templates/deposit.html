@@ -3,25 +3,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+
     <title>Deposit</title>
 </head>
 <body>
-<h2>Deposit</h2>
-<hr>
-<p>Deposit the amount:</p>
-<form action="#" th:action="@{/api/saveDeposit}"
-      th:object="${account}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <input type="hidden" th:field="*{number}"/>
-    <input type="hidden" th:field="*{client}"/>
-
-    <p>Enter an amount: </p>
-    <input type="text" th:field="*{amount}" placeholder="amount">
-
-    <button type="submit">Deposit</button>
-
-</form>
-<p><a th:href="/api/welcome">Return</a></p>
-
+<div class="container">
+    <h2>Deposit</h2>
+    <hr>
+    <div class="card border-dark mb-3" style="max-width: 18rem; padding: 1rem 0.5rem;">
+        <h5 class="card-title">Deposit the amount.</h5>
+        <form action="#" th:action="@{/api/saveDeposit}"
+              th:object="${account}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{number}"/>
+            <!--    <input type="hidden" th:field="*{client}"/>-->
+            <div class="form-group">
+                <label>Enter the amount: </label>
+                <input type="text" class="form-control" th:field="*{amount}" placeholder="Amount">
+                <small class="form-text text-muted">Your amount should be positive.</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm btn-block col-sm-5">Deposit</button>
+        </form>
+    </div>
+    <div class="mt-1">
+        <p><a class="btn btn-sm btn-light btn-block col-sm-1" th:href="@{/api/welcome}">Return</a></p>
+    </div>
+</div>
 </body>
 </html>

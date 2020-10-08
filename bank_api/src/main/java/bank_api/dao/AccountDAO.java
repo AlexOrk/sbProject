@@ -16,5 +16,5 @@ public interface AccountDAO {
 
 	public void deleteById(int id);
 
-		
+	public void merge(Account account);
 }

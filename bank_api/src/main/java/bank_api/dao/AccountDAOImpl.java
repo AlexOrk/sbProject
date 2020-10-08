@@ -57,6 +57,10 @@ public class AccountDAOImpl implements AccountDAO {
         return account;
     }
 
+    // ####################################################
+    // Не ясно, зачем нужен этот метод? Если нужен список аккаунтов конкретного клиента,
+    // то можно просто обратиться к clientService.findById().getAccounts()
+    // ####################################################
     @Override
     public List<Account> findByCliendId(int clientId) {
 
@@ -79,6 +83,16 @@ public class AccountDAOImpl implements AccountDAO {
 
         // save employee
         currentSession.saveOrUpdate(account);
+    }
+
+    @Override
+    public void merge(Account account) {
+
+        // get the current hibernate session
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        // save employee
+        currentSession.merge(account);
     }
 
 

@@ -1,5 +1,6 @@
 package bank_api.services;
 
+import bank_api.entity.Account;
 import bank_api.entity.Card;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface CardService {
     public Long getNewCardNumber();
 
     public int generateCvv();
+
+    public Card createCard(Account account);
 }

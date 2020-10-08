@@ -34,28 +34,33 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional
     public Card findById(int id) {
         return cardDAO.findById(id);
     }
 
     @Override
+    @Transactional
     public List<Card> findByAccountId(int accountId) {
         return cardDAO.findByAccountId(accountId);
     }
 
 
     @Override
+    @Transactional
     public void save(Card card) {
         cardDAO.save(card);
     }
 
 
     @Override
+    @Transactional
     public void deleteById(int id) {
         cardDAO.deleteById(id);
     }
 
     @Override
+    @Transactional
     public String getExpirationDate() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -66,6 +71,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional
     public Long getNewCardNumber() {
         long number = 0;
         List<Card> cards = cardDAO.findAll();
@@ -78,7 +84,17 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional
     public int generateCvv() {
         return new Random().nextInt(999);
+    }
+
+    @Override
+    @Transactional
+    public Card createCard(Account account) {
+        long number = getNewCardNumber();
+        int cvv = generateCvv();
+        String date = getExpirationDate();
+        return new Card(number, date, cvv, account);
     }
 }

@@ -3,27 +3,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+
     <title>Accounts</title>
 </head>
 <body>
-<h2>Your available accounts</h2>
-<hr>
-<p>Select an account:</p>
-<table>
-    <tr>
-        <th>Account number</th>
-        <th>Current amount</th>
-        <th>Select cart</th>
-    </tr>
-    <tr th:each="account : ${accounts}">
-        <td th:text="${account.number}"/>
-        <td th:text="${account.amount}"/>
-        <td>
-            <a th:href="@{/api/deposit(id=${account.id})}"></a>
-        </td>
-    </tr>
-</table>
-<p><a th:href="/api/welcome">Back</a> </p>
-
+<div class="container">
+    <h2>Your available accounts</h2>
+    <hr>
+    <p>Select an account:</p>
+    <!--<div th:with="flag=${flag}"></div>-->
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Account number</th>
+            <th>Current amount</th>
+            <th>Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="account : ${accounts}">
+            <td th:text="${account.number}"/>
+            <td th:text="${account.amount}"/>
+            <td>
+                <a th:if="${flag}" th:href="@{/api/deposit(id=${account.id})}"
+                   class="btn btn-info btn-sm btn_block a_update_btn">Select</a>
+                <a th:if="${!flag}" th:href="@{/api/createCard(id=${account.id})}"
+                   class="btn btn-info btn-sm btn_block a_update_btn">Select</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p><a class="btn btn-sm btn-light btn-block col-sm-1" th:href="@{/api/welcome}">Back</a></p>
+</div>
 </body>
 </html>
