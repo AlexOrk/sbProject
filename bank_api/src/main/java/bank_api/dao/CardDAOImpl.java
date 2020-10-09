@@ -60,23 +60,23 @@ public class CardDAOImpl implements CardDAO {
 	// Точно ли нужен этот метод?
 	// Можно найти карты через аккаунт ДАО
 	// #####################################
-    @Override
-    public List<Card> findByAccountId(int accountId) {
-		logger.info("\"findByAccountId(int accountId)\"");
-		logger.info("Get the current hibernate session");
-        Session currentSession = entityManager.unwrap(Session.class);
-
-		logger.info("Create a query");
-        Query<Card> theQuery = currentSession.createQuery(
-                        "from Card where account_id=:accountId",Card.class);
-        theQuery.setParameter("accountId", accountId);
-
-		logger.info("Get cards");
-        List<Card> cards = theQuery.getResultList();
-
-		logger.info("Return cards");
-        return cards;
-    }
+//    @Override
+//    public List<Card> findByAccountId(int accountId) {
+//		logger.info("\"findByAccountId(int accountId)\"");
+//		logger.info("Get the current hibernate session");
+//        Session currentSession = entityManager.unwrap(Session.class);
+//
+//		logger.info("Create a query");
+//        Query<Card> theQuery = currentSession.createQuery(
+//                        "from Card where account_id=:accountId",Card.class);
+//        theQuery.setParameter("accountId", accountId);
+//
+//		logger.info("Get cards");
+//        List<Card> cards = theQuery.getResultList();
+//
+//		logger.info("Return cards");
+//        return cards;
+//    }
 
 
 	@Override
@@ -89,22 +89,22 @@ public class CardDAOImpl implements CardDAO {
 		currentSession.saveOrUpdate(card);
 	}
 
-
-	@Override
-	public void deleteById(int id) {
-		logger.info("\"deleteById(int id)\"");
-		logger.info("Get the current hibernate session");
-		Session currentSession = entityManager.unwrap(Session.class);
-
-		logger.info("Create a query");
-		Query theQuery =
-				currentSession.createQuery(
-						"delete from Card where id=:cardId");
-		theQuery.setParameter("cardId", id);
-
-		logger.info("Delete object with primary key");
-		theQuery.executeUpdate();
-	}
+//
+//	@Override
+//	public void deleteById(int id) {
+//		logger.info("\"deleteById(int id)\"");
+//		logger.info("Get the current hibernate session");
+//		Session currentSession = entityManager.unwrap(Session.class);
+//
+//		logger.info("Create a query");
+//		Query theQuery =
+//				currentSession.createQuery(
+//						"delete from Card where id=:cardId");
+//		theQuery.setParameter("cardId", id);
+//
+//		logger.info("Delete object with primary key");
+//		theQuery.executeUpdate();
+//	}
 }
 
 

@@ -37,11 +37,11 @@ public class CardServiceImpl implements CardService {
         return cardDAO.findById(id);
     }
 
-    @Override
-    @Transactional
-    public List<Card> findByAccountId(int accountId) {
-        return cardDAO.findByAccountId(accountId);
-    }
+//    @Override
+//    @Transactional
+//    public List<Card> findByAccountId(int accountId) {
+//        return cardDAO.findByAccountId(accountId);
+//    }
 
 
     @Override
@@ -51,11 +51,11 @@ public class CardServiceImpl implements CardService {
     }
 
 
-    @Override
-    @Transactional
-    public void deleteById(int id) {
-        cardDAO.deleteById(id);
-    }
+//    @Override
+//    @Transactional
+//    public void deleteById(int id) {
+//        cardDAO.deleteById(id);
+//    }
 
     @Override
     @Transactional

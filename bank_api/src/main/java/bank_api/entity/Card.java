@@ -18,7 +18,7 @@ public class Card implements Serializable {
 	private long number;
 
 	@Column(name="issue")
-	private String issue;
+	private String expDate;
 
 	@Column(name="cvv")
 	private int cvv;
@@ -33,7 +33,7 @@ public class Card implements Serializable {
 
 	public Card(long number, String issue, int cvv, Account account) {
 		this.number = number;
-		this.issue = issue;
+		this.expDate = issue;
 		this.cvv = cvv;
 		this.account = account;
 	}
@@ -56,12 +56,12 @@ public class Card implements Serializable {
 		this.number = number;
 	}
 
-	public String getIssue() {
-		return issue;
+	public String getExpDate() {
+		return expDate;
 	}
 
-	public void setIssue(String issue) {
-		this.issue = issue;
+	public void setExpDate(String expDate) {
+		this.expDate = expDate;
 	}
 
 	public int getCvv() {
@@ -85,7 +85,7 @@ public class Card implements Serializable {
 	@Override
 	public String toString() {
 		return "{\n  \"id\":" + id + ",\n  \"number\":" + number +
-				",\n  \"issue\":" + issue + ",\n  \"cvv\":" + cvv + "\n}";
+				",\n  \"issue\":" + expDate + ",\n  \"cvv\":" + cvv + "\n}";
 	}
 
 }
