@@ -1,7 +1,7 @@
 # Bank API
 ---
-Title: Bank API
-Authors: Vladislav Bounegru, Alexey Orkhoyan
+Title: Bank API  
+Authors: Vladislav Bounegru, Alexey Orkhoyan  
 Date: 09.10.2020
 ---
 ### Bank API project for SB
