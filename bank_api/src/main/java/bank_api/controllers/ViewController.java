@@ -15,8 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-//** ViewController receives data from the client browser.
-// Used to work with the graphical interface. */
+/** ViewController receives data from the clients browser.
+ Used to work with the web GUI. */
 
 @Controller
 @RequestMapping("/api")
@@ -50,6 +50,7 @@ public class ViewController {
 						@RequestParam("action") String action,
 						Model model) {
 		logger.info("\"/check\"");
+
 		List<Account> accounts = clientService.findById(clientId).getAccounts();
 		model.addAttribute("accounts", accounts);
 
@@ -71,8 +72,10 @@ public class ViewController {
 	@GetMapping("/deposit")
 	public String deposit(@RequestParam("id") int accountId, Model model) {
 		logger.info("\"/selectAccount\"");
+
 		Account account = accountService.findById(accountId);
 		model.addAttribute("account", account);
+
 		logger.info("Return deposit page");
 		return "deposit";
 	}
@@ -80,7 +83,7 @@ public class ViewController {
 	// The controller saves deposit on selected account
 	@PostMapping("/saveDeposit")
 	public String saveDeposit(@ModelAttribute("account") Account newAccount,
-						  Model model) {
+							  Model model) {
 		logger.info("\"/saveDeposit\"");
 
 		Account account = accountService.findById(newAccount.getId());
@@ -91,6 +94,7 @@ public class ViewController {
 
 		List<Account> accounts = newAccount.getClient().getAccounts();
 		model.addAttribute("accounts", accounts);
+
 		logger.info("Return amount page");
 		return "amount";
 	}
@@ -105,6 +109,7 @@ public class ViewController {
 
 		model.addAttribute("accounts", accounts);
 		model.addAttribute("cards", cards);
+
 		logger.info("Return cards page");
 		return "cards";
 	}
@@ -119,10 +124,12 @@ public class ViewController {
 		Account selectedAccount = accountService.findById(accountId);
 		Card newCard = cardService.createCard(selectedAccount);
 		cardService.save(newCard);
+		logger.info("Card was saved!");
 
-		logger.info("Redirect to /viewCards");
 		int clientId = selectedAccount.getClient().getId();
 		redirectAttributes.addAttribute("id", clientId);
+
+		logger.info("Redirect to /viewCards");
 		return "redirect:/api/viewCards";
 	}
 

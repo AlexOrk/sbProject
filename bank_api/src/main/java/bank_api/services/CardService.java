@@ -12,11 +12,11 @@ public interface CardService {
 
     public Card findById(int id);
 
-    public List<Card> findByAccountId(int accountId);
+//    public List<Card> findByAccountId(int accountId);
 
     public void save(Card card);
 
-    public void deleteById(int id);
+//    public void deleteById(int id);
 
     public String getExpirationDate();
 

@@ -31,17 +31,17 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountDAO.findById(id);
         return account.getAmount().toString();
     }
-
-    @Override
-    @Transactional
-    public void deposit(int id, String sum) {
-        logger.info("\"deposit(int id, String sum)\"");
-        Account account = accountDAO.findById(id);
-        BigDecimal bd = account.getAmount().add(new BigDecimal(sum));
-        account.setAmount(bd);
-
-        accountDAO.save(account);
-    }
+//
+//    @Override
+//    @Transactional
+//    public void deposit(int id, String sum) {
+//        logger.info("\"deposit(int id, String sum)\"");
+//        Account account = accountDAO.findById(id);
+//        BigDecimal bd = account.getAmount().add(new BigDecimal(sum));
+//        account.setAmount(bd);
+//
+//        accountDAO.save(account);
+//    }
 
     @Override
     @Transactional
@@ -49,22 +49,22 @@ public class AccountServiceImpl implements AccountService {
         return accountDAO.findById(id);
     }
 
-    @Override
-    public List<Account> findByClientId(int clientId) {
-        return accountDAO.findByCliendId(clientId);
-    }
+//    @Override
+//    public List<Account> findByClientId(int clientId) {
+//        return accountDAO.findByCliendId(clientId);
+//    }
 
     @Override
     @Transactional
     public List<Account> findAll() {
         return accountDAO.findAll();
     }
-
-    @Override
-    @Transactional
-    public void save(Account account) {
-        accountDAO.save(account);
-    }
+//
+//    @Override
+//    @Transactional
+//    public void save(Account account) {
+//        accountDAO.save(account);
+//    }
 
     @Override
     @Transactional
