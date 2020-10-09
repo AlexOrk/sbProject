@@ -32,7 +32,10 @@ public class Client implements Serializable {
         this.name = name;
     }
 
-    // define getter/setter
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+// define getter/setter
 
     public int getId() {
         return id;
@@ -58,7 +61,10 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "{\n  \"id\":" + id + ",\n  \"name\":" + name + "\n}";
+        return "{ \"id\": " + id + ", \"name\":\" " + name + "\", " +
+                "\"accounts\":" +
+                accounts.toString() +
+                " }";
     }
 
 }

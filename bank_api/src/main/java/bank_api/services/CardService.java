@@ -2,6 +2,7 @@ package bank_api.services;
 
 import bank_api.entity.Account;
 import bank_api.entity.Card;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 

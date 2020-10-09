@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 public class RestMainController {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
-
     private ClientService clientService;
     private AccountService accountService;
     private CardService cardService;
@@ -39,44 +38,50 @@ public class RestMainController {
     }
 
 
-    @PostMapping("/newCard")
+    @PostMapping("/new-card")
     public String addCard(@RequestBody String jsonString) {
-        logger.info("\"/createCard\"");
-
+        logger.info("\"/new-card\"");
+        System.out.println(jsonString);
         JSONObject root = new JSONObject(jsonString);
 
         int account_id = (int) root.get("id");
         Account selectedAccount = accountService.findById(account_id);
 
         Card newCard = cardService.createCard(selectedAccount);
-
         cardService.save(newCard);
         logger.info("Card was added");
 
         return newCard.toString();
     }
 
-    @PostMapping("/viewCards")
+    @PostMapping("/view-cards")
     public String viewCards(@RequestBody String jsonString) throws IOException {
-        logger.info("\"/viewCards\"");
+        logger.info("\"/view-cards\"");
         ObjectMapper mapper = new ObjectMapper();
         StringReader reader = new StringReader(jsonString);
 
         Client client = mapper.readValue(reader, Client.class);
 
-        List<Account> accounts = accountService.findByClientId(client.getId());
+
+        List<Account> accounts = client.getAccounts();
+        System.out.println(accounts);
         List<Card> cards = new ArrayList<>();
         for (Account account : accounts) {
-            cards.addAll(cardService.findByAccountId(account.getId()));
+            cards.addAll(account.getCards());
         }
         return cards.toString();
     }
 
-    @PostMapping("/viewBalance")
-    public String viewBalance(@RequestBody Account account) {
-        logger.info("\"/viewBalance\"");
-        Account selectedAccount = accountService.findById(account.getId());
-        return selectedAccount.toString();
+    @PostMapping("/view-balance")
+    public String viewBalance(@RequestBody String jsonString) throws IOException {
+
+        logger.info("\"/view-balance\"");
+
+        ObjectMapper mapper = new ObjectMapper();
+        StringReader reader = new StringReader(jsonString);
+
+        Account account = mapper.readValue(reader, Account.class);
+        return account.toString();
     }
 
     @PostMapping("/deposit")

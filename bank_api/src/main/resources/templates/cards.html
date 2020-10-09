@@ -26,7 +26,7 @@
         <tr th:each="card : ${cards}">
             <td th:text="${card.account.number}"/>
             <td th:text="${card.number}"/>
-            <td th:text="${card.issue}"/>
+            <td th:text="${card.expDate}"/>
         </tr>
         </tbody>
     </table>

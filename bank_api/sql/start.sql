@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `card`;
 CREATE TABLE `card` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `number` bigint(16) NOT NULL,
-  `issue` varchar(10) NOT NULL,
+  `expDate` varchar(10) NOT NULL,
   `cvv` int(3) NOT NULL,
   `account_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),

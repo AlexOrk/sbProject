@@ -85,7 +85,9 @@ public class Account implements Serializable {
 
 	@Override
 	public String toString() {
-		return "{\n  \"id\":" + id + ",\n  \"number\":" + number + ",\n  \"amount\":" + amount + ",\n  \"client_id\":" + client.getId() + "\n}";
+		return "{ \"id\": " + id + ", \"number\": " + number + ", \"amount\": " + amount + "," +
+				"\"client\":  {\"id\": " + client.getId() + ", \"name\": " + client.getId() + "}" +
+				",\"cards\": "+ cards.toString()+ " }";
 	}
 		
 }
