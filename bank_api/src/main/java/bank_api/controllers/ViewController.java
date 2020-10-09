@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 //** ViewController receives data from the client browser.
-// Used to work with the graphical interface. */
+// Used to work with the GUI. */
 
 @Controller
 @RequestMapping("/api")
