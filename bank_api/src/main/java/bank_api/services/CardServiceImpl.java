@@ -37,25 +37,11 @@ public class CardServiceImpl implements CardService {
         return cardDAO.findById(id);
     }
 
-//    @Override
-//    @Transactional
-//    public List<Card> findByAccountId(int accountId) {
-//        return cardDAO.findByAccountId(accountId);
-//    }
-
-
     @Override
     @Transactional
     public void save(Card card) {
         cardDAO.save(card);
     }
-
-
-//    @Override
-//    @Transactional
-//    public void deleteById(int id) {
-//        cardDAO.deleteById(id);
-//    }
 
     @Override
     @Transactional

@@ -54,34 +54,6 @@ public class ClientDAOImpl implements ClientDAO {
 		return client;
 	}
 
-
-//	@Override
-//	public void save(Client client) {
-//		logger.info("\"save(Client client)\"");
-//		logger.info("Get the current hibernate session");
-//		Session currentSession = entityManager.unwrap(Session.class);
-//
-//		logger.info("Save the client");
-//		currentSession.saveOrUpdate(client);
-//	}
-
-//
-//	@Override
-//	public void deleteById(int id) {
-//		logger.info("\"deleteById(int id)\"");
-//		logger.info("Get the current hibernate session");
-//		Session currentSession = entityManager.unwrap(Session.class);
-//
-//		logger.info("Create a query");
-//		Query theQuery =
-//				currentSession.createQuery(
-//						"delete from Client where id=:clientId");
-//		theQuery.setParameter("clientId", id);
-//
-//		logger.info("Delete object with primary key");
-//		theQuery.executeUpdate();
-//	}
-
 }
 
 
