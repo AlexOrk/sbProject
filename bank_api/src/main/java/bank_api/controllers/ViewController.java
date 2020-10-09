@@ -13,10 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /** ViewController receives data from the clients browser.
- Used to work with the web GUI. */
+ Used to demonstrate working with the web GUI. */
 
 @Controller
 @RequestMapping("/api")
@@ -49,7 +50,7 @@ public class ViewController {
 	public String selectAccount(@RequestParam("id") int clientId,
 						@RequestParam("action") String action,
 						Model model) {
-		logger.info("\"/check\"");
+		logger.info("\"/selectAccount\"");
 
 		List<Account> accounts = clientService.findById(clientId).getAccounts();
 		model.addAttribute("accounts", accounts);
@@ -71,7 +72,7 @@ public class ViewController {
 	// The controller searches an account and returns deposit form page
 	@GetMapping("/deposit")
 	public String deposit(@RequestParam("id") int accountId, Model model) {
-		logger.info("\"/selectAccount\"");
+		logger.info("\"/deposit\"");
 
 		Account account = accountService.findById(accountId);
 		model.addAttribute("account", account);
@@ -87,7 +88,8 @@ public class ViewController {
 		logger.info("\"/saveDeposit\"");
 
 		Account account = accountService.findById(newAccount.getId());
-		newAccount.setAmount(account.getAmount().add(newAccount.getAmount()));
+		BigDecimal bd = accountService.checkAmount((newAccount.getAmount()));
+		newAccount.setAmount(account.getAmount().add(bd));
 		newAccount.setClient(account.getClient());
 		accountService.merge(newAccount);
 		logger.info("Amount was deposited!");

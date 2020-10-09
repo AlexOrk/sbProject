@@ -55,8 +55,6 @@ public class CardDAOImpl implements CardDAO {
 		return card;
 	}
 
-
-
 	@Override
 	public void save(Card card) {
 		logger.info("\"save(Card card)\"");
@@ -66,7 +64,6 @@ public class CardDAOImpl implements CardDAO {
 		logger.info("Save the card");
 		currentSession.saveOrUpdate(card);
 	}
-
 }
 
 

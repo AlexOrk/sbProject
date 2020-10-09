@@ -15,6 +15,7 @@ public class ClientServiceImpl implements ClientService {
         this.clientDAO = clientDAO;
     }
 
+
     @Override
     @Transactional
     public Client findById(int id) {

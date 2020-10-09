@@ -6,9 +6,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import bank_api.dao.AccountDAO;
-import bank_api.dao.CardDAO;
-import bank_api.dao.ClientDAO;
 import bank_api.entity.Account;
 import bank_api.entity.Card;
 import bank_api.entity.Client;
@@ -22,6 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/** RestMainController receives data from the clients browser.
+ Used to demonstrate working with JSON files. */
 @RestController
 public class RestMainController {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
@@ -96,7 +95,7 @@ public class RestMainController {
         account.setAmount(account.getAmount().add(amount));
 
         accountService.merge(account);
-        logger.info("\"/amount was deposited\"");
+        logger.info("\"Amount was deposited\"");
 
         return account.toString();
     }

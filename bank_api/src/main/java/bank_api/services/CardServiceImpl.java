@@ -25,6 +25,7 @@ public class CardServiceImpl implements CardService {
         this.cardDAO = cardDAO;
     }
 
+
     @Override
     @Transactional
     public List<Card> findAll() {

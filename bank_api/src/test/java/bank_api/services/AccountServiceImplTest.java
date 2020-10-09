@@ -10,8 +10,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -53,5 +55,12 @@ public class AccountServiceImplTest {
         List<Account> accounts = Arrays.asList(account);
 
         assertEquals(cards, accountService.getAllCards(accounts));
+    }
+
+    @Test
+    public void checkAmount_test() {
+        BigDecimal bd = new BigDecimal(new Random().nextInt(100000) - 5000);
+        assertEquals(bd.setScale(2, RoundingMode.DOWN).abs(),
+                accountService.checkAmount(bd));
     }
 }

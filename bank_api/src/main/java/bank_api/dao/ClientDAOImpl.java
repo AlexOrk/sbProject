@@ -53,7 +53,6 @@ public class ClientDAOImpl implements ClientDAO {
 		logger.info("Return the client");
 		return client;
 	}
-
 }
 
 

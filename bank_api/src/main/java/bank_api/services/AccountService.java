@@ -3,6 +3,7 @@ package bank_api.services;
 import bank_api.entity.Account;
 import bank_api.entity.Card;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface AccountService {
@@ -19,6 +20,8 @@ public interface AccountService {
 //    public void save(Account account);
 
     public void merge(Account account);
+
+    public BigDecimal checkAmount(BigDecimal bigDecimal);
 
     public List<Card> getAllCards(List<Account> accounts);
 }

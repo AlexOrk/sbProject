@@ -17,7 +17,7 @@ public class Card implements Serializable {
 	@Column(name="number")
 	private long number;
 
-	@Column(name="expDate")
+	@Column(name="expdate")
 	private String expDate;
 
 	@Column(name="cvv")

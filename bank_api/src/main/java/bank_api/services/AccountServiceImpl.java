@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountServiceImpl(AccountDAO accountDAO) {
         this.accountDAO = accountDAO;
     }
+
 
     @Override
     @Transactional
@@ -37,7 +39,6 @@ public class AccountServiceImpl implements AccountService {
     public Account findById(int id) {
         return accountDAO.findById(id);
     }
-
 
     @Override
     @Transactional
@@ -63,5 +64,14 @@ public class AccountServiceImpl implements AccountService {
         }
         logger.info("Return card list");
         return cards;
+    }
+
+    @Override
+    public BigDecimal checkAmount(BigDecimal bigDecimal) {
+        BigDecimal bd = bigDecimal.setScale(2, RoundingMode.DOWN).abs();
+        System.out.println();
+        System.out.println(bd);
+        System.out.println();
+        return bd;
     }
 }

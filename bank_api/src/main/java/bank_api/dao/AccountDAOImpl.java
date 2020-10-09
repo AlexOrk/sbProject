@@ -58,7 +58,6 @@ public class AccountDAOImpl implements AccountDAO {
         return account;
     }
 
-
     @Override
     public void merge(Account account) {
         logger.info("\"merge(Account account)\"");
@@ -68,8 +67,6 @@ public class AccountDAOImpl implements AccountDAO {
         logger.info("Save the account");
         currentSession.merge(account);
     }
-
-
 }
 
 
