@@ -45,7 +45,6 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    @Transactional
     public String getExpirationDate() {
         logger.info("\"getExpirationDate()\"");
         Calendar cal = Calendar.getInstance();
@@ -58,7 +57,6 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    @Transactional
     public Long getNewCardNumber() {
         logger.info("\"getNewCardNumber()\"");
         long number = 0;
@@ -73,13 +71,11 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    @Transactional
     public int generateCvv() {
         return new Random().nextInt(999);
     }
 
     @Override
-    @Transactional
     public Card createCard(Account account) {
         logger.info("\"createCard(Account account)\"");
         long number = getNewCardNumber();

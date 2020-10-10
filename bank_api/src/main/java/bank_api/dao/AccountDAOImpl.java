@@ -28,7 +28,6 @@ public class AccountDAOImpl implements AccountDAO {
 
 
     @Override
-    @Transactional
     public List<Account> findAll() {
         logger.info("\"findAll()\"");
         logger.info("Get the current hibernate session");
